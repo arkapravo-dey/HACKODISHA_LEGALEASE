@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarizer and Translator</title>
+</head>
+<body>
+    <h1>Summarize and Translate Legal Text</h1>
+    <form action="/abstractor" method="post" enctype="multipart/form-data">
+        <label for="pdf_file">Upload PDF:</label>
+        <input type="file" name="pdf_file" id="pdf_file" required>
+        <br><br>
+        <label for="target_lang">Select Target Language:</label>
+        <select name="target_lang" id="target_lang" required>
+            <option value="hi">Hindi</option>
+            <option value="bn">Bengali</option>
+            <option value="ta">Tamil</option>
+            <option value="te">Telugu</option>
+            
+        </select>
+        <br><br>
+        <button type="submit">Summarize and Translate</button>
+    </form>
+
+    {% if english_summary %}
+    <h2>English Summary:</h2>
+    <p>{{ english_summary }}</p>
+    <audio controls>
+        <source src="{{ url_for('static', filename=english_audio) }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <h2>Translated Summary:</h2>
+    <p>{{ translated_summary }}</p>
+    <audio controls>
+        <source src="{{ url_for('static', filename=translated_audio) }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    {% endif %}
+    
+    <br>
+    <a href="{{ url_for('index') }}">Go Back</a>
+</body>
+</html>
